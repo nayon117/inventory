@@ -1,5 +1,11 @@
-import { ClerkProvider, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/clerk-react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import Theme from "../components/Theme";
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
@@ -22,6 +28,9 @@ const MainLayout = () => {
         <SignedOut>
           <Link to="/sign-in">Sign In</Link>
         </SignedOut>
+      </div>
+      <div className="flex justify-end items-center ">
+        <Theme />
       </div>
       <main>
         <Outlet></Outlet>
