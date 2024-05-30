@@ -1,9 +1,10 @@
+import TabSection from "../../components/TabSection";
 
 
 const Home = () => {
   return (
     <div>
-      hello
+     <TabSection/>
     </div>
   );
 };
