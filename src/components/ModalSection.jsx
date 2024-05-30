@@ -17,7 +17,7 @@ const ModalSection = ({isOpen,onClose}) => {
           <ModalHeader>Sale Order</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          <SaleForm/>
+          <SaleForm onClose={onClose} />
           </ModalBody>
         </ModalContent>
         </Modal>

@@ -10,26 +10,30 @@ import { Select } from "chakra-react-select";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import useSales from "../hooks/useSales";
 
-export default function SaleForm() {
+export default function SaleForm({ onClose}) {
   const {
     handleSubmit,
     register,
     setValue,
     watch,
+    reset,
     control,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const products = watch("products");
+  const {refetch} = useSales();
 
   function onSubmit(values) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 3000);
-    });
+  
+        const sales = JSON.parse(localStorage.getItem("sales")) || [];
+        sales.push(values);
+        localStorage.setItem("sales", JSON.stringify(sales));
+        refetch(); // Refetch data after submission
+        reset(); // Reset the form fields
+        onClose(); // Close the modal
   }
 
   return (

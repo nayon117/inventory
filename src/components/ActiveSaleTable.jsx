@@ -7,19 +7,15 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { Icon } from '@chakra-ui/react';
 import { BsThreeDots } from "react-icons/bs";
+import useSales from "../hooks/useSales";
+
 
 
 const ActiveSaleTable = () => {
-  const [sale, setSale] = useState([]);
-  useEffect(() => {
-    fetch("/sale.json")
-      .then((res) => res.json())
-      .then((data) => setSale(data));
-  }, []);
-  console.log(sale)
+  const {sales} = useSales();
+
   return (
     <section className="">
       <TableContainer>
@@ -35,12 +31,12 @@ const ActiveSaleTable = () => {
           </Thead>
           <Tbody>
 
-              {sale.map((item) => (
-                <Tr key={item.customer_id}>
-                  <Td>{item.customer_id}</Td>
-                  <Td>{item.customer_id}</Td>
-                  <Td>{item.items[0].price}</Td>
-                  <Td>{item.invoice_date}</Td>
+              {sales.map((item) => (
+                <Tr key={item.id}>
+                  {/* <Td>{item.customer_id}</Td> */}
+                  <Td>{item.id}</Td>
+                  <Td>{item.price}</Td>
+                  <Td>{item.date}</Td>
                   <Td>
                     <Icon as={BsThreeDots} />
                   </Td>
