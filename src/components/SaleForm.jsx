@@ -10,9 +10,9 @@ import { Select } from "chakra-react-select";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import useSales from "../hooks/useSales";
+import { useEffect } from "react";
 
-export default function SaleForm({ onClose}) {
+export default function SaleForm({ sale,onClose,refetch}) {
   const {
     handleSubmit,
     register,
@@ -24,17 +24,31 @@ export default function SaleForm({ onClose}) {
   } = useForm();
 
   const products = watch("products");
-  const {refetch} = useSales();
+  const isEditMode = !!sale;
+  useEffect(() => {
+    if (sale) {
+      reset(sale);
+    }
+  }, [sale, reset]);
 
-  function onSubmit(values) {
-  
-        const sales = JSON.parse(localStorage.getItem("sales")) || [];
-        sales.push(values);
-        localStorage.setItem("sales", JSON.stringify(sales));
-        refetch(); // Refetch data after submission
-        reset(); // Reset the form fields
-        onClose(); // Close the modal
-  }
+  const onSubmit = async (values) => {
+    const sales = JSON.parse(localStorage.getItem("sales")) || [];
+    if (isEditMode) {
+      // Update existing sale
+      const index = sales.findIndex((s) => s.id === values.id);
+      if (index >= 0) {
+        sales[index] = values;
+      }
+    } else {
+      // Add new sale
+      sales.push(values);
+    }
+
+    localStorage.setItem("sales", JSON.stringify(sales));
+    refetch(); // Refetch data after submission
+    reset(); // Reset the form fields
+    onClose(); // Close the modal
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -43,6 +57,8 @@ export default function SaleForm({ onClose}) {
         <Input
           id="id"
           placeholder="id"
+          defaultValue={isEditMode ? sale.id : ""}
+          readOnly={isEditMode}
           {...register("id", {
             required: "This is required",
             minLength: { value: 2, message: "Minimum length should be 2" },
@@ -127,7 +143,7 @@ export default function SaleForm({ onClose}) {
       </FormControl>
 
       <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
-        Submit
+      {isEditMode ? "Update" : "Submit"}
       </Button>
     </form>
   );
