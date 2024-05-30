@@ -1,4 +1,5 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import ActiveSaleTable from "./ActiveSaleTable";
 
 const TabSection = () => {
   return (
@@ -12,7 +13,7 @@ const TabSection = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            <ActiveSaleTable/>
           </TabPanel>
           <TabPanel>
             <p>two!</p>
