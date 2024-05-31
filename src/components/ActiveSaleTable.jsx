@@ -60,6 +60,10 @@ const ActiveSaleTable = () => {
                   <Td>{item.date}</Td>
                   <Td>
                   <IconButton
+                    boxShadow='md' px='4' py='2' rounded='md' 
+                    background={
+                      {default: 'white', _dark: 'gray.800'}
+                    }
                     icon={<BsThreeDots />}
                     onClick={() => openModal(item)}
                   />

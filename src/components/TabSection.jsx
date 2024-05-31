@@ -6,13 +6,15 @@ import ModalSection from "./ModalSection";
 const TabSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <section className="">
-      <div className="flex  justify-between">
+    <section className="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16 mt-16">
+      <div className="flex flex-col-reverse md:flex-row gap-6  justify-between">
         <div>
-          <Tabs variant="soft-rounded" colorScheme="green">
+          <Tabs variant='unstyled'>
             <TabList>
-              <Tab>Active Sale Orders</Tab>
-              <Tab>Completed Sale Orders</Tab>
+              <Tab _selected={{ color: 'white', bg: 'green.400' }}>Active Sale Orders</Tab>
+              <Tab _selected={{ color: 'white', bg: 'green.400' }}
+              className="ml-4"
+              >Completed Sale Orders</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -25,7 +27,10 @@ const TabSection = () => {
           </Tabs>
         </div>
         <div>
-          <Button onClick={onOpen}>+Sale Order</Button>
+          <Button 
+          colorScheme='green'
+  
+          onClick={onOpen}>+Sale Order</Button>
 
           <ModalSection isOpen={isOpen} onClose={onClose} />
             

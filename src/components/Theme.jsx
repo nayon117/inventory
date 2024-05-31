@@ -5,7 +5,14 @@ const Theme = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Button onClick={toggleColorMode}>
+    <Button
+      boxShadow="md"
+      px="4"
+      py="2"
+      rounded="md"
+      background={{ default: "white", _dark: "gray.800" }}
+      onClick={toggleColorMode}
+    >
       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
   );

@@ -12,7 +12,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect } from "react";
 
-export default function SaleForm({ sale,onClose,refetch}) {
+export default function SaleForm({ sale, onClose, refetch }) {
   const {
     handleSubmit,
     register,
@@ -110,7 +110,7 @@ export default function SaleForm({ sale,onClose,refetch}) {
           placeholder="price"
           {...register("price", {
             required: "This is required",
-            minLength: { value: 4, message: "Minimum length should be 2" },
+            minLength: { value: 2, message: "Minimum length should be 2" },
           })}
         />
         <FormErrorMessage>
@@ -143,7 +143,7 @@ export default function SaleForm({ sale,onClose,refetch}) {
       </FormControl>
 
       <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
-      {isEditMode ? "Update" : "Submit"}
+        {isEditMode ? "Update" : "Submit"}
       </Button>
     </form>
   );
