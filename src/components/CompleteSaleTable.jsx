@@ -25,7 +25,7 @@ const CompleteSaleTable = () => {
             <Tr>
               <Th>ID</Th>
               <Th>Customer Name</Th>
-              <Th>Customer Name</Th>
+              <Th>Products</Th>
               <Th>Products</Th>
               <Th>Quantity</Th>
               <Th>Invoice No</Th>
