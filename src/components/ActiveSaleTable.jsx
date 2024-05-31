@@ -7,34 +7,29 @@ import {
   Td,
   TableContainer,
   IconButton,
-  ModalBody,
-  ModalCloseButton,
-  ModalHeader,
-  ModalContent,
-  Modal,
-  ModalOverlay,
 } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
-import useSales from "../hooks/useSales";
 import { useState } from "react";
+import useSales from "../hooks/useSales";
 import SaleForm from "./SaleForm";
-
-
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from "@chakra-ui/react";
 
 const ActiveSaleTable = () => {
-  const { sales, refetch } = useSales();
+  const { sales } = useSales();
   const [selectedSale, setSelectedSale] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const openModal = (sale) => {
     setSelectedSale(sale);
-    setIsModalOpen(true);
+    setIsOpen(true);
   };
 
   const closeModal = () => {
     setSelectedSale(null);
-    setIsModalOpen(false);
+    setIsOpen(false);
   };
+
+  console.log('Sales in table:', sales);
 
   return (
     <section className="">
@@ -50,41 +45,36 @@ const ActiveSaleTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-
-              {sales.map((item) => (
-                <Tr key={item.id}>
-                  {/* <Td>{item.customer_id}</Td> */}
-                  <Td>{item.id}</Td>
-                  <Td>{item.id}</Td>
-                  <Td>{item.price}</Td>
-                  <Td>{item.date}</Td>
-                  <Td>
+            {sales.map((item) => (
+              <Tr key={item.id}>
+                <Td>{item.id}</Td>
+                <Td>{item.id}</Td>
+                <Td>{item.price}</Td>
+                <Td>{item.date}</Td>
+                <Td>
                   <IconButton
-                    boxShadow='md' px='4' py='2' rounded='md' 
-                    background={
-                      {default: 'white', _dark: 'gray.800'}
-                    }
                     icon={<BsThreeDots />}
                     onClick={() => openModal(item)}
                   />
-                  </Td>
-                </Tr>
-              ))}
-
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </TableContainer>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+
+      <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Sale</ModalHeader>
+          <ModalHeader>{selectedSale ? "Edit Sale" : "Add Sale"}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <SaleForm sale={selectedSale} onClose={closeModal} refetch={refetch} />
+            <SaleForm sale={selectedSale} onClose={closeModal} />
           </ModalBody>
         </ModalContent>
       </Modal>
     </section>
   );
 };
+
 export default ActiveSaleTable;

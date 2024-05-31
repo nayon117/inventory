@@ -2,6 +2,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, useDisclosure } from "
 
 import ActiveSaleTable from "./ActiveSaleTable";
 import ModalSection from "./ModalSection";
+import CompleteSaleTable from "./CompleteSaleTable";
 
 const TabSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -16,12 +17,12 @@ const TabSection = () => {
               className="ml-4"
               >Completed Sale Orders</Tab>
             </TabList>
-            <TabPanels>
+            <TabPanels className="mt-6">
               <TabPanel>
                 <ActiveSaleTable />
               </TabPanel>
               <TabPanel>
-                <p>two!</p>
+                <CompleteSaleTable/>
               </TabPanel>
             </TabPanels>
           </Tabs>

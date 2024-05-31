@@ -11,8 +11,9 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect } from "react";
+import useSales from "../hooks/useSales";
 
-export default function SaleForm({ sale, onClose, refetch }) {
+export default function SaleForm({ sale, onClose}) {
   const {
     handleSubmit,
     register,
@@ -25,6 +26,7 @@ export default function SaleForm({ sale, onClose, refetch }) {
 
   const products = watch("products");
   const isEditMode = !!sale;
+  const {refetch} = useSales()
   useEffect(() => {
     if (sale) {
       reset(sale);
