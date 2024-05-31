@@ -12,6 +12,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect } from "react";
 import useSales from "../hooks/useSales";
+import toast from "react-hot-toast";
 
 export default function SaleForm({ sale, onClose}) {
   const {
@@ -41,9 +42,11 @@ export default function SaleForm({ sale, onClose}) {
       if (index >= 0) {
         sales[index] = values;
       }
+      toast.success('Sale updated successfully!');
     } else {
       // Add new sale
       sales.push(values);
+      toast.success('Sale added successfully!');
     }
 
     localStorage.setItem("sales", JSON.stringify(sales));
