@@ -1,5 +1,4 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, useDisclosure } from "@chakra-ui/react";
-
 import ActiveSaleTable from "./ActiveSaleTable";
 import ModalSection from "./ModalSection";
 import CompleteSaleTable from "./CompleteSaleTable";

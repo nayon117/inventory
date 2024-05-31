@@ -20,15 +20,15 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import {  useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 
 const ActiveSaleTable = () => {
   const { sales } = useSales();
   const [selectedSale, setSelectedSale] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const {user} = useUser()
-  
+  const { user } = useUser();
 
+  // modal functionality to open and close
   const openModal = (sale) => {
     setSelectedSale(sale);
     setIsOpen(true);
@@ -39,7 +39,6 @@ const ActiveSaleTable = () => {
     setIsOpen(false);
   };
 
-  console.log("Sales in table:", sales);
 
   return (
     <section className="">
@@ -62,9 +61,7 @@ const ActiveSaleTable = () => {
                 <Td>
                   {sale?.items?.map((item, index) => (
                     <div key={index}>
-                      <span>
-                      ₹: {item.price}
-                      </span>
+                      <span>₹: {item.price}</span>
                       <br />
                     </div>
                   ))}
@@ -82,6 +79,7 @@ const ActiveSaleTable = () => {
         </Table>
       </TableContainer>
 
+     {/* modal */}
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
         <ModalContent>
