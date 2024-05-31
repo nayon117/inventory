@@ -12,12 +12,22 @@ import { BsThreeDots } from "react-icons/bs";
 import { useState } from "react";
 import useSales from "../hooks/useSales";
 import SaleForm from "./SaleForm";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import {  useUser } from "@clerk/clerk-react";
 
 const ActiveSaleTable = () => {
   const { sales } = useSales();
   const [selectedSale, setSelectedSale] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const {user} = useUser()
+  
 
   const openModal = (sale) => {
     setSelectedSale(sale);
@@ -29,7 +39,7 @@ const ActiveSaleTable = () => {
     setIsOpen(false);
   };
 
-  console.log('Sales in table:', sales);
+  console.log("Sales in table:", sales);
 
   return (
     <section className="">
@@ -45,16 +55,25 @@ const ActiveSaleTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {sales.map((item) => (
-              <Tr key={item.id}>
-                <Td>{item.id}</Td>
-                <Td>{item.id}</Td>
-                <Td>{item.price}</Td>
-                <Td>{item.date}</Td>
+            {sales.map((sale) => (
+              <Tr key={sale.customer_id}>
+                <Td>{sale?.customer_id}</Td>
+                <Td>{user?.fullName}</Td>
+                <Td>
+                  {sale?.items?.map((item, index) => (
+                    <div key={index}>
+                      <span>
+                      ₹: {item.price}
+                      </span>
+                      <br />
+                    </div>
+                  ))}
+                </Td>
+                <Td>{sale?.invoice_date}</Td>
                 <Td>
                   <IconButton
                     icon={<BsThreeDots />}
-                    onClick={() => openModal(item)}
+                    onClick={() => openModal(sale)}
                   />
                 </Td>
               </Tr>
