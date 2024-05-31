@@ -35,7 +35,7 @@ This application is a Single Page Application (SPA) designed for a consumer good
 
 3. Start the application:
     ```bash
-    npm start
+    npm run dev
     ```
 
 The application will be accessible at `http://localhost:5173`.
