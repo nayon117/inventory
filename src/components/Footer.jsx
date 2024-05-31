@@ -1,10 +1,10 @@
-
-
 const Footer = () => {
   return (
-    <div>
-      <h2>This is Footer</h2>
-    </div>
+    <footer>
+      <p className="shadow-xl py-5 text-center">
+        &copy; 2024 Inventory. All Rights Reserved.
+      </p>
+    </footer>
   );
 };
 export default Footer;
